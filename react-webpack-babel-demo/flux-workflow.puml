@@ -1,0 +1,26 @@
+@startuml "Flux Workflow"
+
+actor User
+participant View
+entity Action
+participant Dispatcher
+participant Store
+
+== init ==
+
+View -> Store: register event callback
+Store -> Dispatcher: subscribe to actions
+
+== running ==
+
+User -> View: do something
+View -> Action: create an action
+Action --> Dispatcher: dispatch created action
+
+Dispatcher --> Store: store receive actions
+Store -> Store: update data
+Store --> View: trigger event for data changes
+View -> View: render again
+View --> User
+
+@enduml

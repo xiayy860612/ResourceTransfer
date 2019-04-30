@@ -67,6 +67,36 @@ Flux是Facebook提出的一套前端应用架构模式, 核心是**单向数据�
 
 ![](./flux-workflow.png)
 
+![](./flux-workflow-single-direction.png)
+
+- Action, 由用户在View上触发的行为
+- Dispatcher, 分发Action消息到相应的Store
+- Store, 保存应用的数据. 处理订阅的Action, 更新相应的数据并通过event通知View更新. 单例模式, 即整个应用中每种store仅有一个 .
+- View, 展示层
+
+### Redux
+
+Redux是JavaScript的**状态管理器**, 基于Flux, 提供了可预测的状态管理, 
+可运行在不同的环境(客户端, 服务器以及原生应用).
+
+三大定律:
+
+- 单一数据源, 用store来存储整个state
+- state是只读的, 不能直接修改state, 只能通过触发action来修改数据
+- 使用纯函数(stateless functonal)来修改, 编写reducer来规定如何通过action来修改state
+
+在Redux中, 整个程序的所有数据存储在唯一一个Object中.
+reducer总是返回一个新的state, 而不会改变原有的state.
+store保存reducer返回的新的state, 可以通过**store.getState**获取新的state
+或者通过**store.subscribe**(listener)来监听state的变化.
+
+可以在dispatch之后到调用reducer之前这个中间过程中插入middleware, 来提供一些扩展功能.
+
+#### react-redux
+
+- Provider
+- connect
+
 ---
 [Demo]: https://github.com/vikingmute/webpack-react-codes
 [ECMAScript 6 入门]: http://es6.ruanyifeng.com/
